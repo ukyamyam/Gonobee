@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import StartDiagnosisPage from './components/StartDiagnosisPage';
 import DiagnosisPage from './components/DiagnosisPage';
 import ResultsPage from './components/ResultsPage';
+import CreateHealthAccountPage from './components/CreateHealthAccountPage';
 
-type Page = 'start' | 'diagnosis' | 'results';
+type Page = 'start' | 'diagnosis' | 'results' | 'create-account';
 
 interface DiagnosisResult {
   diagnosis: string;
@@ -31,6 +32,16 @@ function App() {
     setDiagnosisResult(null);
   };
 
+  const handleCreateAccount = () => {
+    setCurrentPage('create-account');
+  };
+
+  const handleAccountCreated = () => {
+    // In a real app, this would redirect to dashboard or login
+    alert('Account created successfully! You can now log in to access your health dashboard.');
+    setCurrentPage('start');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {currentPage === 'start' && (
@@ -46,6 +57,13 @@ function App() {
         <ResultsPage 
           result={diagnosisResult}
           onStartOver={handleStartOver}
+          onCreateAccount={handleCreateAccount}
+        />
+      )}
+      {currentPage === 'create-account' && (
+        <CreateHealthAccountPage
+          onBack={() => setCurrentPage('results')}
+          onAccountCreated={handleAccountCreated}
         />
       )}
     </div>

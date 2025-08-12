@@ -5,9 +5,10 @@ import { DiagnosisResult } from '../utils/medicalDiagnosis';
 interface ResultsPageProps {
   result: DiagnosisResult;
   onStartOver: () => void;
+  onCreateAccount: () => void;
 }
 
-const ResultsPage: React.FC<ResultsPageProps> = ({ result, onStartOver }) => {
+const ResultsPage: React.FC<ResultsPageProps> = ({ result, onStartOver, onCreateAccount }) => {
   const [capturedImages, setCapturedImages] = useState<number[]>([1, 2, 3, 4, 5]);
   
   const isNormal = result.primaryDiagnosis.icd11Code === 'QA02';
@@ -252,7 +253,10 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ result, onStartOver }) => {
             <span>Start New Diagnosis</span>
           </button>
           
-          <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl py-3 px-6 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-200">
+          <button 
+            onClick={onCreateAccount}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl py-3 px-6 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-200"
+          >
             Create Health Account
           </button>
         </div>
